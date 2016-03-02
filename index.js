@@ -16,7 +16,7 @@ module.exports = function thunderVip(cb) {
       var accounts = [];
       $('article.article-content p').each(function () {
         var text = $(this).text().trim();
-        if (text.match(/^分享社迅雷会员账号/)) {
+        if (text.match(/^分享社迅雷/)) {
           accounts = accounts.concat(text.split('\n').map(format));
         }
       });
@@ -27,8 +27,8 @@ module.exports = function thunderVip(cb) {
 
 function format(str) {
   var obj = {};
-  var match = str.match(/分享社迅雷会员账号(.+)密码(.+)/);
-  obj.user = match[1].trim();
-  obj.password = match[2].trim();
+  var match = str.match(/分享社迅雷(会员|vip)?账号(.+)密码(.+)/);
+  obj.user = match[2].trim();
+  obj.password = match[3].trim();
   return obj;
 }
