@@ -1,0 +1,14 @@
+#!/usr/bin/env node
+
+var thunderVip = require('..');
+var chalk = require('chalk');
+
+thunderVip(function (err, accounts) {
+  if (err) {
+    console.error(err);
+    return;
+  }
+  accounts.forEach(function (account) {
+    console.log(chalk.green(account.user) + ' - ' + account.password);
+  });
+});

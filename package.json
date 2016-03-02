@@ -1,0 +1,28 @@
+{
+  "name": "thunder-vip",
+  "description": "Get available thunder vips.",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "node test"
+  },
+  "bin": {
+    "thunder": "./bin/thunder"
+  },
+  "keywords": [
+    "thunder",
+    "xunlei",
+    "迅雷",
+    "vip"
+  ],
+  "dependencies": {
+    "chalk": "^1.1.1",
+    "cheerio": "^0.20.0",
+    "request": "^2.69.0"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nswbmw/thunder-vip.git"
+  }
+}
