@@ -4,7 +4,7 @@ var cheerio = require('cheerio');
 var request = require('request');
 
 var URL = 'http://www.fenxs.com/';
-var REGEXP = /([0-9a-z]+:[12])[^0-9]+([0-9]+)/;
+var REGEXP = /([0-9a-z_]+:[12])[^0-9]+([0-9]+)/;
 
 module.exports = function thunderVip(cb) {
   request(URL, function (err, res, body) {
