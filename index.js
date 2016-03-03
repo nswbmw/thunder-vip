@@ -4,6 +4,7 @@ var cheerio = require('cheerio');
 var request = require('request');
 
 var URL = 'http://www.fenxs.com/';
+var REGEXP = /([0-9a-z]+:[12])[^0-9]+([0-9]+)/;
 
 module.exports = function thunderVip(cb) {
   request(URL, function (err, res, body) {
@@ -16,7 +17,7 @@ module.exports = function thunderVip(cb) {
       var accounts = [];
       $('article.article-content p').each(function () {
         var text = $(this).text().trim();
-        if (text.match(/^分享社迅雷/)) {
+        if (text.match(REGEXP)) {
           accounts = accounts.concat(text.split('\n').map(format));
         }
       });
@@ -25,10 +26,12 @@ module.exports = function thunderVip(cb) {
   });
 };
 
+module.exports.REGEXP = REGEXP;
+
 function format(str) {
   var obj = {};
-  var match = str.match(/分享社迅雷(会员|vip)?账号(.+)密码(.+)/);
-  obj.user = match[2].trim();
-  obj.password = match[3].trim();
+  var match = str.match(REGEXP);
+  obj.user = match[1].trim();
+  obj.password = match[2].trim();
   return obj;
 }
