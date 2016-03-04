@@ -19,3 +19,7 @@ assert.deepEqual('分享社迅雷会员账号h425_79:1密码5597513'.match(REGEX
   'h425_79:1',
   '5597513',
 ]);
+assert.deepEqual('分享社迅雷会员账号zbr-czb:4密码5793171'.match(REGEXP).slice(1, 3), [
+  'zbr-czb:4',
+  '5793171',
+]);
