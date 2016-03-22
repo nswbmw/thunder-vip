@@ -4,7 +4,10 @@ var cheerio = require('cheerio');
 var request = require('request');
 
 var URL = 'http://www.fenxs.com/';
-var REGEXP = /([0-9a-z_-]+:[1-9])[^0-9]+([0-9]+)/;
+var REGEXPS = [
+  /([0-9a-z_-]+:[1-9]|[1-9]+)[^0-9]+([0-9]+)/,
+  /([0-9]{11})[^0-9a-z_-]+(.+)/
+];
 
 module.exports = function thunderVip(cb) {
   request(URL, function (err, res, body) {
@@ -17,7 +20,7 @@ module.exports = function thunderVip(cb) {
       var accounts = [];
       $('article.article-content p').each(function () {
         var text = $(this).text().trim();
-        if (text.match(REGEXP)) {
+        if (match(text)) {
           accounts = accounts.concat(text.split('\n').map(format));
         }
       });
@@ -26,11 +29,19 @@ module.exports = function thunderVip(cb) {
   });
 };
 
-module.exports.REGEXP = REGEXP;
+module.exports.REGEXPS = REGEXPS;
+
+function match(text) {
+  var result;
+  for (var i = 0; i < REGEXPS.length; ++i) {
+    result = text.match(REGEXPS[i]);
+    if (result) return result;
+  }
+}
 
 function format(str) {
   var obj = {};
-  var match = str.match(REGEXP);
+  var match = match(str);
   obj.user = match[1].trim();
   obj.password = match[2].trim();
   return obj;
