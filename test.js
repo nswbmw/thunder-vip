@@ -3,7 +3,7 @@
 var assert = require('assert');
 var REGEXPS = require('./').REGEXPS;
 
-// ([0-9a-z_-]+:[1-9]|[1-9]+)[^0-9]+([0-9]+)
+// ([0-9a-z_-]+:[1-9])[^0-9]+([0-9]+)
 assert.deepEqual(match('分享社迅雷会员账号271167358:2密码3399913').slice(1, 3), [
   '271167358:2',
   '3399913',

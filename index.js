@@ -5,7 +5,7 @@ var request = require('request');
 
 var URL = 'http://www.fenxs.com/';
 var REGEXPS = [
-  /([0-9a-z_-]+:[1-9]|[1-9]+)[^0-9]+([0-9]+)/,
+  /([0-9a-z_-]+:[1-9])[^0-9]+([0-9]+)/,
   /分享社迅雷(?:vip)?(?:账号|共享)(.+)密码(.+)/
 ];
 
@@ -21,7 +21,9 @@ module.exports = function thunderVip(cb) {
       $('article.article-content p').each(function () {
         var text = $(this).text().trim();
         if (match(text)) {
-          accounts = accounts.concat(text.split('\n').map(format));
+          accounts = accounts.concat(text.split('\n').map(format).filter(function (item) {
+            return !!item;
+          }));
         }
       });
       cb(null, accounts);
@@ -41,8 +43,12 @@ function match(text) {
 
 function format(str) {
   var obj = {};
-  var match = match(str);
-  obj.user = match[1].trim();
-  obj.password = match[2].trim();
+  var _match = match(str);
+  if (!_match) {
+    return null;
+  }
+
+  obj.user = _match[1].trim();
+  obj.password = _match[2].trim();
   return obj;
 }
