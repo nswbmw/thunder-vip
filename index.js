@@ -6,7 +6,7 @@ var request = require('request');
 var URL = 'http://www.fenxs.com/';
 var REGEXPS = [
   /([0-9a-z_-]+:[1-9]|[1-9]+)[^0-9]+([0-9]+)/,
-  /([0-9]{11})[^0-9a-z_-]+(.+)/
+  /分享社迅雷(?:账号|共享)(.+)密码(.+)/
 ];
 
 module.exports = function thunderVip(cb) {
