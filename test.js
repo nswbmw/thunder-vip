@@ -25,13 +25,17 @@ assert.deepEqual(match('分享社迅雷会员账号zbr-czb:4密码5793171').slic
   '5793171',
 ]);
 
-// 分享社迅雷(?:账号|共享)(.+)密码(.+)
+// 分享社迅雷(?:vip)?(?:账号|共享)(.+)密码(.+)
 assert.deepEqual(match('分享社迅雷共享13993187637密码fenxs.com').slice(1, 3), [
   '13993187637',
   'fenxs.com',
 ]);
 assert.deepEqual(match('分享社迅雷账号xxxapple@163.com密码fenxs.com').slice(1, 3), [
   'xxxapple@163.com',
+  'fenxs.com',
+]);
+assert.deepEqual(match('分享社迅雷vip账号15209295312密码fenxs.com').slice(1, 3), [
+  '15209295312',
   'fenxs.com',
 ]);
 function match(text) {
