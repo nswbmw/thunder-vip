@@ -3,7 +3,6 @@
 var assert = require('assert');
 var REGEXPS = require('./').REGEXPS;
 
-// ([0-9a-z_-]+:[1-9])[^0-9]+([0-9]+)
 assert.deepEqual(match('分享社迅雷会员账号271167358:2密码3399913').slice(1, 3), [
   '271167358:2',
   '3399913',
@@ -25,7 +24,7 @@ assert.deepEqual(match('分享社迅雷会员账号zbr-czb:4密码5793171').slic
   '5793171',
 ]);
 
-// 分享社迅雷(?:vip)?(?:账号|共享|会员)(.+)密码(.+)
+
 assert.deepEqual(match('分享社迅雷共享13993187637密码fenxs.com').slice(1, 3), [
   '13993187637',
   'fenxs.com',
@@ -41,6 +40,14 @@ assert.deepEqual(match('分享社迅雷vip账号15209295312密码fenxs.com').sli
 assert.deepEqual(match('分享社迅雷会员15209295312密码fenxs.com').slice(1, 3), [
   '15209295312',
   'fenxs.com',
+]);
+assert.deepEqual(match('迅雷账号15209295312密码19850404x').slice(1, 3), [
+  '15209295312',
+  '19850404x',
+]);
+assert.deepEqual(match('分享社迅雷会员账号pangxie19891110密码lll444555').slice(1, 3), [
+  'pangxie19891110',
+  'lll444555',
 ]);
 function match(text) {
   var result;
